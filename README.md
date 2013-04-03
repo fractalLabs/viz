@@ -1,19 +1,25 @@
-# viz
+# wkml-api
 
-FIXME
+Libreria de visualizaciones.
 
-## Prerequisites
+## Uso
 
-You will need [Leiningen][1] 1.7.0 or above installed.
+Importar [viz "0.1.0-SNAPSHOT"]
 
-[1]: https://github.com/technomancy/leiningen
+(use 'viz.core)
 
-## Running
+Meter en un (html ) de hiccup:
+graphael (importa al html los css)
 
-To start a web server for the application, run:
+(bar [1 2 3 4])
 
-    lein ring server
+(pie [1 2 3 4])
+
+(pie [1 2 3 4] ["uno" "dos" "tres" "cuatro"])
+
+(line [1 2 3 4])
+
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Fractal Labs
