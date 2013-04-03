@@ -2,7 +2,7 @@
   (:use [hiccup core page element]))
 
 
-(def graphael (html (include-js "raphael.js" "g.raphael-min.js" "g.pie-min.js" "g.bar-min.js" "g.line-min.js")
+(def graphael (html (include-js "http://static.fractalmedia.mx/raphael.js" "http://static.fractalmedia.mx/g.raphael-min.js" "http://static.fractalmedia.mx/g.pie-min.js" "http://static.fractalmedia.mx/g.bar-min.js" "http://static.fractalmedia.mx/g.line-min.js")
    (javascript-tag 
 "function addLoadEvent(func) {
   var oldonload = window.onload;
