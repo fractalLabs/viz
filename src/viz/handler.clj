@@ -1,5 +1,5 @@
 (ns viz.handler
-  (:use [viz core highcharts])
+  (:use [viz core highcharts graphael])
   (:use compojure.core)
   (:use [hiccup core page element])
   (:require [compojure.handler :as handler]
