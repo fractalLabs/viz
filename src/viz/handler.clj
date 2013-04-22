@@ -1,6 +1,5 @@
 (ns viz.handler
-  (:use viz.core)
-;  (:use compojure.core)
+  (:use [viz core highcharts])
   (:use compojure.core)
   (:use [hiccup core page element])
   (:require [compojure.handler :as handler]
@@ -38,7 +37,7 @@
    [:html
    [:head
     [:title "SMOP Dashboard"]]
-   [:body {:bgcolor "aaaaaa"} graphael
+   [:body graphael
     [:h1 "SMOP"]
     [:table {:align "center" :border 1 :cellpadding 1 :cellspacing 1 :style "width 90%"}
      [:tbody
@@ -52,11 +51,12 @@
        [:td]]]]]]))
 
 (defroutes app-routes
-  (GET "/" [] (smop))
+  (GET "/" [] (smop2))
   ;(POST "/" request (api (:body request)))
   (GET "/g" [] (html graphael (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"]) (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"])))
-  (GET "/l" [] (line [1 43 23 65 4 200]))
+  (GET "/l" [] (html graphael (line [1 43 23 65 4 200])))
   (GET "/b" [] (html graphael (bar [1 2 3 4] [5 6 7 8])))
+  (GET "/h" [] (html highcharts (b-demo) (b-demo))) 
   (route/resources "/")
   (route/not-found "Not Found"))
 
