@@ -56,7 +56,8 @@
   (GET "/g" [] (html graphael (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"]) (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"])))
   (GET "/l" [] (html graphael (line [1 43 23 65 4 200])))
   (GET "/b" [] (html graphael (bar [1 2 3 4] [5 6 7 8])))
-  (GET "/h" [] (html highcharts (b-demo) (b-demo))) 
+  (GET "/h" [] (html highcharts (bar-demo (rand-id)) (bar-demo (rand-id)) (bubble-demo (rand-id))))
+  (GET "/bubble" [] (html highcharts (bubble-demo (rand-id))))
   (route/resources "/")
   (route/not-found "Not Found"))
 

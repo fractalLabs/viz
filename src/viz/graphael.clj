@@ -18,7 +18,6 @@
   }
 }")))
 
-(defn vec-js-format [v] (str "[" (apply str (interpose "," v)) "]"))
 (defn vec-js-format-str [v] (str "[\"" (apply str (interpose "\",\"" v)) "\"]"))
 
 
