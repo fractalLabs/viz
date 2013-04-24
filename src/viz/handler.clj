@@ -8,7 +8,7 @@
 
 
 (defroutes app-routes
-  (GET "/" [] (html charts (chart barras-demo) (chart bubbles-demo)))
+  (GET "/" [] (html charts (chart barras-demo) (chart bubbles-demo) (dirty-pie pie-demo)))
   (GET "/bubble" [] (html charts (chart (rand-id) bubbles-demo)))
   (route/resources "/")
   (route/not-found "Not Found"))
