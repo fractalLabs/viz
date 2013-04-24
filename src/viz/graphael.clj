@@ -2,6 +2,8 @@
   (:use [hiccup core page element])
   (:use [viz core]))
 
+;;;;; Scheduled for deletion. This is legacy crap.
+
 (def graphael (html (include-js "http://static.fractalmedia.mx/raphael.js" "http://static.fractalmedia.mx/g.raphael-min.js" "http://static.fractalmedia.mx/g.pie-min.js" "http://static.fractalmedia.mx/g.bar-min.js" "http://static.fractalmedia.mx/g.line-min.js")
    (javascript-tag 
 "function addLoadEvent(func) {
@@ -95,3 +97,55 @@ addLoadEvent( function () {
 (html
        (javascript-tag (line-js rand-id vs))
       "<div id=\"holder"rand-id"\" style=\"width: 640px; height: 480px;\"></div>")))
+
+
+;;;; Mielda legacy que estaba en handler
+(defn smop []
+   (str "
+<html>
+	<head>
+		<title>SMOP Dashboard</title>
+	</head>
+	<body bgcolor=\"aaaaaa\">"graphael"
+		<h1>
+			SMOP</h1>
+		<table align=\"center\" border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 90%;\">
+			<tbody>
+				<tr>
+					<td>"(line [1 430 23 5 4 200])"</td>
+					<td>"(line [1 43 3 65 4 200])"</td>
+					<td>"(line [1 43 23 65 4 20])"</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table></body>
+</html>
+"))
+
+(defn smop2 []
+  (html
+   [:html
+   [:head
+    [:title "SMOP Dashboard"]]
+   [:body graphael
+    [:h1 "SMOP"]
+    [:table {:align "center" :border 1 :cellpadding 1 :cellspacing 1 :style "width 90%"}
+     [:tbody
+      [:tr
+       [:td (line [1 430 23 5 4 200])]
+       [:td (line [1 43 3 65 4 200])]
+       [:td (line [1 43 23 65 4 20])]]
+      [:tr
+       [:td]
+       [:td]
+       [:td]]]]]]))
+
+
+;  ;(POST "/" request (api (:body request)))
+;  (GET "/g" [] (html graphael (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"]) (pie [1 2 3 4 5 6 7 8 9] ["a" "b" "c" "d" "e" "F" "gffff" "H" "i"])))
+;  (GET "/l" [] (html graphael (line [1 43 23 65 4 200])))
+;  (GET "/b" [] (html graphael (bar [1 2 3 4] [5 6 7 8])))

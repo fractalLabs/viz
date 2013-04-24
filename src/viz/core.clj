@@ -4,16 +4,14 @@
 
 (defn rand-id [] (int (rand 100000)))
 
-(defn vec-js-format [v] (str "[" (apply str (interpose "," v)) "]"))
-
 
 (defn ify [p f] #(if (p %) (f %) %))
 (def stringify (ify keyword? name))
 (def quotify (ify string? #(str "'" % "'")))
-(defn dirty? [o] (and (string? o) (not= (first o) \[) (not= (first o) \{)))
-(def dirty-quotify (ify dirty? #(str "'" % "'")))
+(defn dirty? [o] (and (string? o) (not= (first o) \[) (not= (first o) \{) (not= "false" o) (not= "true" o)))
+(def dirty-quotify (ify dirty?  #(str "'" % "'")))
 
-
+(defn vec-js-format [v] (str "[" (apply str (interpose "," (map dirty-quotify v))) "]"))
 (defn map-js-format [m] (str "{" (apply str (interpose "," (map #(str (stringify (first %)) ":" (dirty-quotify (second %))) m))) "}"))
 
 (defn js-format [o]
