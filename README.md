@@ -1,24 +1,26 @@
-# wkml-api
+# viz
 
 Libreria de visualizaciones.
 
 ## Uso
 
-Importar [viz "0.1.0-SNAPSHOT"]
+Agrega la dependencia:
+[viz "0.1.0-SNAPSHOT"]
 
-(use 'viz.core)
+Agrega al namespace:
+(:use [viz core highcharts])
 
 Meter en un (html ) de hiccup:
-graphael (importa al html los css)
+(html charts) ;importa al html los js de highcharts
 
-(bar [1 2 3 4])
+Teniendo un mapa descriptivo:
+(def chart-map {
+"chart" {"type" "bubble" "zoomType" "xy"}
+"title" {"text" "Highcharts bubbles"}
+"series"[{"data" [[4 2 3] [4 5 6] [7 8 9]]} {"data" [[10 11 12] [13 14 15] [16 17 18]]}]})
 
-(pie [1 2 3 4])
-
-(pie [1 2 3 4] ["uno" "dos" "tres" "cuatro"])
-
-(line [1 2 3 4])
-
+Genera la grafica con:
+(chart chart-map)
 
 ## License
 
