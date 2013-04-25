@@ -48,3 +48,26 @@
 (def pie-demo [["a" 12] ["b" 24] ["c" 8]])
 
 (defn dirty-pie [v] (pie {"series" [{"type" "pie" "data" v}]}))
+
+(defn series
+  "Genera el vector de vectores que el mapa series en la key data"
+  [maps k categs]
+  (vec
+   (for [n maps]
+     {"name" (str (n k)) "data" (vec (map #(% n) categs))})))
+
+
+(defn gen-chart
+  "maps - coleccion de mapas que usará para la gráfica
+   chart - bar/pie/bubble etc
+   :title - titulo de la gráfica
+   :xtitle - la leyenda del eje x
+   :xvals - los valores que tendrá el eje x (categories)
+   :ytitle - la leyenda del eje y
+   :name - la key que tomará c/valor para mostrar de maps"
+  [maps chart & {:keys [title xtitle xvals ytitle name]}]
+  {"chart" {"type" chart}
+   "title" {"text" (or title "")}
+   "xAxis" (merge (if xtitle {"title" {"text" xtitle}}) {"categories" (vec (map str xvals))})
+   "yAxis" {"title" {"text" (or ytitle "")}}
+   "series" (series maps name xvals)})
