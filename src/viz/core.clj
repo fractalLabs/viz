@@ -2,8 +2,9 @@
   (:use [hiccup core page element]))
 
 
-(defn rand-id [] (int (rand 100000)))
+(def jquery "http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js")
 
+(defn rand-id [] (int (rand 100000)))
 
 (defn ify [p f] #(if (p %) (f %) %))
 (def stringify (ify keyword? name))
