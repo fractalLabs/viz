@@ -54,7 +54,7 @@
   [maps k categs]
   (vec
    (for [n maps]
-     {"name" (str (n k)) "data" (vec (map #(% n) categs))})))
+     {"name" (str (n k)) "data" (vec (map #(n %) categs))})))
 
 
 (defn gen-chart
