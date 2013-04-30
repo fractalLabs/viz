@@ -1,5 +1,5 @@
 (ns viz.handler
-  (:use [viz core highcharts])
+  (:use [viz core highcharts pivot])
   (:use compojure.core)
   (:use [hiccup core page element])
   (:require [compojure.handler :as handler]
@@ -18,6 +18,7 @@
                                                     "bubble" :title "a"
                                                     :xtitle "a b c" :xvals [:a :b :d] 
                                                     :name  :e))))
+  (GET "/pivot" [] (pivot demo-definitions demo-data))
   (GET "/bubble" [] (html charts (chart (rand-id) bubbles-demo)))
   (route/resources "/")
   (route/not-found "Not Found"))

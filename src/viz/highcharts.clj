@@ -3,7 +3,7 @@
   (:use [hiccup core page element]))
 
 
-(def charts (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" "http://code.highcharts.com/highcharts.js" "http://code.highcharts.com/modules/exporting.js" "http://code.highcharts.com/highcharts-more.js"))
+(def charts (include-js jquery "http://code.highcharts.com/highcharts.js" "http://code.highcharts.com/modules/exporting.js" "http://code.highcharts.com/highcharts-more.js"))
 
 (defn js-boiler [id s]
   (str "$(function () {
