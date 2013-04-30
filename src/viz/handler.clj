@@ -13,7 +13,7 @@
                                                  "bar" :title "una prueba"
                                                  :xtitle "a b y d" :xvals [:a :b :d] :ytitle "todas las c"
                                                  :name :c))))
-  (GET "/pivot" [] (pivoto (crea-mapa-str demo-definitions demo-data)))
+  (GET "/pivot" [] (pivot demo-definitions demo-data))
   (GET "/bubble" [] (html charts (chart (rand-id) bubbles-demo)))
   (route/resources "/")
   (route/not-found "Not Found"))

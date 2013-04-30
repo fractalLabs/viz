@@ -92,12 +92,14 @@
       (js-code mapa-str)]]])
 
 
-(defn pivoto [mapa-str] (html pivot-csslol pivot-js (html-hickoried mapa-str)))
+(defn pivot-generator [mapa-str] (html pivot-csslol pivot-js (html-hickoried mapa-str)))
 
 ;fields es un vector de mapas con llaves "name" "type" "filtrable"
 ;data llega como un vector de vectores donde el primer vector son los
 ;nombres de las columnas.
 (defn crea-mapa-str [fields data] (str "{json: " (generate-string data) ", fields:" (js-format fields) "}"))
+
+(defn pivot [fields data] (pivot-generator (crea-mapa-str fields data)))
 
 ;TODO fn(s) que generen la data (la primera fila de la data sean los
 ;nombres correspondientes en la tabla. type distinga entre numeros y strings.
