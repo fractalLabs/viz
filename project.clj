@@ -5,7 +5,8 @@
   		[hiccup "1.0.2"]
 		[cheshire "5.1.1"]]
   :plugins [[lein-ring "0.8.2"]]
-  :ring {:handler viz.handler/app}
+  :ring {:handler viz.handler/app
+         :port 3001}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]
   		       [compojure "1.1.5"]]}})
