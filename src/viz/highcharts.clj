@@ -41,21 +41,34 @@
 "series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
 
 (def bubbles-demo {
+                   "xAxis" {"title" {"text" "la equis"}}
 "chart" {"type" "bubble" "zoomType" "xy"}
-"series"[{"data" [[4 2 3] [4 5 6] [7 8 9]]} {"data" [[10 11 12] [13 14 15] [16 17 18]]}]})
+"series"[{"name" "cjto 1" "data" [[4 2 3] [4 5 6] [7 8 9]]} {"name" "cjto 2" "data" [[10 11 12] [13 14 15] [16 17 18]]}]})
 
 ;en construccion
 (def pie-demo [["a" 12] ["b" 24] ["c" 8]])
 
 (defn dirty-pie [v] (pie {"series" [{"type" "pie" "data" v}]}))
 
+(defn keystr [k]
+  (let [kstr (str k)]
+    (if (= \: (first k))
+      (apply str (rest k))
+      k)))
+
 (defn series
   "Genera el vector de vectores que el mapa series en la key data"
-  [maps k categs]
-  (vec
-   (for [n maps]
-     {"name" (str (n k)) "data" (vec (map #(n %) categs))})))
-
+  [maps k categs chart]
+  (if-not (= "bubble" chart)
+    (vec
+     (for [n maps]
+       {"name" (str (n k)) "data" (vec (map #(n %) categs))}))
+    (let [cjtos (group-by k maps)]
+      (vec (for [i cjtos]
+             {"name" (str (key i))
+              "data" (vec (map (fn [elem]
+                                 (vec (for [i categs] (elem i))))
+                               (val i)))})))))
 
 (defn gen-chart
   "maps - coleccion de mapas que usará para la gráfica
@@ -70,4 +83,4 @@
    "title" {"text" (or title "")}
    "xAxis" (merge (if xtitle {"title" {"text" xtitle}}) {"categories" (vec (map str xvals))})
    "yAxis" {"title" {"text" (or ytitle "")}}
-   "series" (series maps name xvals)})
+   "series" (doall (series maps name xvals chart))})
