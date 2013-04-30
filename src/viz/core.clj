@@ -11,7 +11,7 @@
 (defn dirty? [o] (and (string? o) (not= (first o) \[) (not= (first o) \{) (not= "false" o) (not= "true" o) (not (re-find #"function" o))))
 (def dirty-quotify (ify dirty?  #(str "'" % "'")))
 
-(defn vec-js-format [v] (str "[" (apply str (interpose "," (map dirty-quotify v))) "]"))
+(defn vec-js-format [v] (str "[" (reduce str (interpose "," (map dirty-quotify v))) "]"))
 (defn map-js-format [m] (str "{" (apply str (interpose "," (map #(str (stringify (first %)) ":" (dirty-quotify (second %))) m))) "}"))
 
 (defn js-format [o]
