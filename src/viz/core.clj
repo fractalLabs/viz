@@ -1,4 +1,5 @@
 (ns viz.core
+  (:require [clojure.string :as s])
   (:use [hiccup core page element]))
 
 
@@ -12,8 +13,8 @@
 (defn dirty? [o] (and (string? o) (not= (first o) \[) (not= (first o) \{) (not= "false" o) (not= "true" o) (not (re-find #"function" o))))
 (def dirty-quotify (ify dirty?  #(str "'" % "'")))
 
-(defn vec-js-format [v] (str "[" (reduce str (interpose "," (map dirty-quotify v))) "]"))
-(defn map-js-format [m] (str "{" (apply str (interpose "," (map #(str (stringify (first %)) ":" (dirty-quotify (second %))) m))) "}"))
+(defn vec-js-format [v] (str "[" (s/join "," (map dirty-quotify v)) "]"))
+(defn map-js-format [m] (str "{" (s/join "," (map #(str (stringify (first %)) ":" (dirty-quotify (second %))) m)) "}"))
 
 (defn js-format [o]
   (if (vector? o) (vec-js-format (vec (map js-format o)))
