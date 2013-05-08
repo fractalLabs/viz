@@ -18,7 +18,8 @@
                                                     "bubble" :title "a"
                                                     :xtitle "a b c" :xvals [:a :b :d] 
                                                     :name  :e))))
-  (GET "/pivot" [] (pivot demo-definitions demo-data))
+  (GET "/pivot" [] (pivot-with-definitions demo-definitions demo-data))
+  (GET "/pvt" [] (pivot (definitions-from-data demo-data) demo-data))
   (GET "/bubble" [] (html charts (chart (rand-id) bubbles-demo)))
   (route/resources "/")
   (route/not-found "Not Found"))

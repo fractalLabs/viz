@@ -30,7 +30,7 @@ Genera la grafica con:
 
 # Pivot Tables
 (use 'viz.pivot)
-(pivot demo-definitions demo-data)
+(pivot demo-data) ;vec de vecs en formato "csv"
 
 ## License
 

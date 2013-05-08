@@ -99,7 +99,7 @@
 ;nombres de las columnas.
 (defn crea-mapa-str [fields data] (str "{json: " (generate-string data) ", fields:" (js-format fields) ", rowLabels: " (js-format fields) "}"))
 
-(defn pivot [fields data] (pivot-generator (crea-mapa-str fields data)))
+(defn pivot-with-definitions [fields data] (pivot-generator (crea-mapa-str fields data)))
 
 ;TODO fn(s) que generen la data (la primera fila de la data sean los
 ;nombres correspondientes en la tabla. type distinga entre numeros y strings.
@@ -114,3 +114,18 @@
 (def demo-data [["last_name","first_name","zip_code","billed_amount","last_billed_date"]
                                  ["Jackson", "Robert", 34471, 100.00, "Tue, 24 Jan 2012 00:00:00 +0000"]
                                  ["Smith", "Jon", 34471, 173.20, "Mon, 13 Feb 2012 00:00:00 +0000"]])
+
+(defn data-type [o]
+  (if (integer? o) "integer"
+      (if (float? o) "float"
+          "string")))
+
+(defn fn-definitions-from-data [n v]
+  (hash-map "name" n "type" (data-type v) "filterable" true "summarizable" "count"))
+
+(defn definitions-from-data [colls]
+  (let [names (first colls)
+        vars (second colls)]
+    (vec (map fn-definitions-from-data names vars))))
+
+(defn pivot [colls] (pivot-with-definitions (definitions-from-data colls) colls))
