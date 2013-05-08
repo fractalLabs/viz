@@ -97,7 +97,7 @@
 ;fields es un vector de mapas con llaves "name" "type" "filtrable"
 ;data llega como un vector de vectores donde el primer vector son los
 ;nombres de las columnas.
-(defn crea-mapa-str [fields data] (str "{json: " (generate-string data) ", fields:" (js-format fields) "}"))
+(defn crea-mapa-str [fields data] (str "{json: " (generate-string data) ", fields:" (js-format fields) ", rowLabels: " (js-format fields) "}"))
 
 (defn pivot [fields data] (pivot-generator (crea-mapa-str fields data)))
 

@@ -1,15 +1,21 @@
 # viz
-
-Libreria de visualizaciones.
+The clojure js Chart & Pivot Table Library
 
 ## Uso
 
 Agrega la dependencia:
 [viz "0.1.0-SNAPSHOT"]
 
+Para ver los ejemplos:
+git clone git@github.com:fractalLabs/viz
+cd viz
+lein ring server
+http://localhost:3000, localhost:3000/pivot y /bars
+
 Agrega al namespace:
 (:use [viz core highcharts])
 
+# Charts
 Meter en un (html ) de hiccup:
 (html charts) ;importa al html los js de highcharts
 
@@ -21,6 +27,10 @@ Teniendo un mapa descriptivo:
 
 Genera la grafica con:
 (chart chart-map)
+
+# Pivot Tables
+(use 'viz.pivot)
+(pivot demo-definitions demo-data)
 
 ## License
 
