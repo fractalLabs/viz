@@ -63,7 +63,7 @@
     (vec
      (for [n maps]
        {"name" (str (n k)) "data" (vec (map #(n %) categs))}))
-    (let [cjtos (group-by #(k %) maps)]
+    (let [cjtos (group-by #(% k) maps)]
       (vec (for [i cjtos]
              {"name" (str (key i))
               "data" (vec (map (fn [elem]
