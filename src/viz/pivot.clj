@@ -81,8 +81,7 @@
           "Canned Reports"
           [:b {:class "caret"}]]
          [:ul {:class "dropdown-menu"}
-          [:li {} [:a {:id "ar-aged-balance", :href "#"} "AR Aged Balance"]]
-          [:li {} [:a {:id "miami-invoice-detail", :href "#"} "Miami Invoice Detail"]]]]]]
+          [:li {} [:a {:id "miami-invoice-detail", :href "#"} "En construccion"]]]]]]
       [:hr {}]
       [:h1 {} "Results"]
       [:span {:id "pivot-detail"}]
@@ -101,20 +100,6 @@
 
 (defn pivot-with-definitions [fields data] (pivot-generator (crea-mapa-str fields data)))
 
-;TODO fn(s) que generen la data (la primera fila de la data sean los
-;nombres correspondientes en la tabla. type distinga entre numeros y strings.
-
-(def demo-definitions [{"name" "last_name",   "type" "string",   "filterable" true},
-        {"name" "first_name",        "type" "string",   "filterable" true},
-        {"name" "zip_code",          "type" "integer",  "filterable" true, "summarizable" "count"},
-        {"name" "pseudo_zip",        "type" "integer",  "filterable" true },
-        {"name" "billed_amount",     "type" "float",    "rowLabelable" false},
-        {"name" "last_billed_date",  "type" "date",     "filterable" true}])
-
-(def demo-data [["last_name","first_name","zip_code","billed_amount","last_billed_date"]
-                                 ["Jackson", "Robert", 34471, 100.00, "Tue, 24 Jan 2012 00:00:00 +0000"]
-                                 ["Smith", "Jon", 34471, 173.20, "Mon, 13 Feb 2012 00:00:00 +0000"]])
-
 (defn data-type [o]
   (if (integer? o) "integer"
       (if (float? o) "float"
@@ -128,4 +113,7 @@
         vars (second colls)]
     (vec (map fn-definitions-from-data names vars))))
 
-(defn pivot [colls] (pivot-with-definitions (definitions-from-data colls) colls))
+(defn stringize-nils [vecs]
+  (vec (map (fn [v] (vec (map #(if (nil? %) "" %) v))) vecs)))
+
+(defn pivot [colls] (pivot-with-definitions (definitions-from-data colls) (stringize-nils colls)))
