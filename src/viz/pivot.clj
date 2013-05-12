@@ -14,7 +14,6 @@
 ;$('#miami-invoice-detail').click(function(event){
 ;      $('#pivot-demo').pivot_display('reprocess_display', {\"filters\":{\"city\":\"Miami\"},\"rowLabels\":[\"last_name\",\"first_name\",\"employer\",\"invoice_date\"],\"summaries\":[\"payment_amount\"]})
                                         ;    });
-
 (defn js-code [mapa-str] (str
  "function setupPivot(input){
     input.callbacks = {afterUpdateResults: function(){
@@ -58,7 +57,7 @@
           [:div {:id "column-label-fields"}]]]
         [:li {:class "dropdown"}
          [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-          "Summarios"
+          "Sumarios"
           [:b {:class "caret"}]]
          [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
           [:div {:id "summary-fields"}]]]
@@ -75,7 +74,6 @@
       [:div {:id "results"}]]
      [:script {:type "text/javascript"}
       (js-code mapa-str)]])
-
 
 (defn pivot-generator [mapa-str] (html pivot-csslol pivot-js (html-hickoried mapa-str)))
 
@@ -99,7 +97,8 @@
         vars (second colls)]
     (vec (map fn-definitions-from-data names vars))))
 
-(defn stringize-nils [vecs]
+(defn stringize-nils "Convierte todos los nils a strings vacias en un vector de vectores" [vecs]
   (vec (map (fn [v] (vec (map #(if (nil? %) "" %) v))) vecs)))
 
-(defn pivot [colls] (pivot-with-definitions (definitions-from-data colls) (stringize-nils colls)))
+(defn pivot "Genera el hiccup de una pivot table, recibe como argumento un vector de vectores, donde el primero contiene los nombres de las columnas y el resto la data"
+  [colls] (pivot-with-definitions (definitions-from-data colls) (stringize-nils colls)))

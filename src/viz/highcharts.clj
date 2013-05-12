@@ -31,30 +31,7 @@
   "series" {"type" "pie"}}
     m)))
 
-
-; Maps con descripciones demo
-(def barras-demo {
-"chart" {"type" "bar"}
-"title" {"text" "OLA K ASE"}
-"xAxis" {"categories" ["Manzanas" "Platanos" "Naranjas"]}
-"yAxis" {"title" {"text" "Frutas"}}
-"series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
-
-(def bubbles-demo {
-                   "xAxis" {"title" {"text" "la equis"}}
-"chart" {"type" "bubble" "zoomType" "xy"}
-"series"[{"name" "cjto 1" "data" [[4 2 3] [4 5 6] [7 8 9]]} {"name" "cjto 2" "data" [[10 11 12] [13 14 15] [16 17 18]]}]})
-
-;en construccion
-(def pie-demo [["a" 12] ["b" 24] ["c" 8]])
-
 (defn dirty-pie [v] (pie {"series" [{"type" "pie" "data" v}]}))
-
-(defn keystr [k]
-  (let [kstr (str k)]
-    (if (= \: (first k))
-      (apply str (rest k))
-      k)))
 
 (defn series
   "Genera el vector de vectores que el mapa series en la key data"
@@ -69,6 +46,7 @@
               "data" (vec (map (fn [elem]
                                  (vec (for [i categs] (elem i))))
                                (val i)))})))))
+
 (defn gen-chart
   "maps - coleccion de mapas que usará para la gráfica
    chart - bar/pie/bubble etc

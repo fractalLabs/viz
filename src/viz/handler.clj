@@ -6,8 +6,22 @@
             [compojure.route :as route]))
 
 
-;; Data de prueba para gen-chart
+;; Data de prueba para charts
 (def data-test [{:a 0 :b 3 :c 6 :d 7 :e 2} {:a 1 :b 2 :c 3 :d 4 :e 2} {:a 5 :b 6 :c 7 :d 8 :e 4} {:a 9 :b 10 :c 11 :d 12 :e 4}])
+
+(def barras-demo {
+"chart" {"type" "bar"}
+"title" {"text" "OLA K ASE"}
+"xAxis" {"categories" ["Manzanas" "Platanos" "Naranjas"]}
+"yAxis" {"title" {"text" "Frutas"}}
+"series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
+
+(def bubbles-demo {
+                   "xAxis" {"title" {"text" "la equis"}}
+"chart" {"type" "bubble" "zoomType" "xy"}
+"series"[{"name" "cjto 1" "data" [[4 2 3] [4 5 6] [7 8 9]]} {"name" "cjto 2" "data" [[10 11 12] [13 14 15] [16 17 18]]}]})
+
+(def pie-demo [["a" 12] ["b" 24] ["c" 8]])
 
 ;; Data de prueba para pivot
 (def demo-definitions [{"name" "last_name",   "type" "string",   "filterable" true},
