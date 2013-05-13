@@ -49,47 +49,48 @@
     });});"))
 
 (defn html-hickoried [mapa-str]
-   [:html {:xmlns "http://www.w3.org/1999/xhtml", :xml:lang "en", :lang "en-us"}
-    [:body {}
-     [:div {:class "container"}
-      [:div {:class "subnav"}
-       [:ul {:class "nav nav-pills"}
-        [:li {:class "dropdown"}
-         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"} "Filter Fields" [:b {:class "caret"}]]
-         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-          [:div {:id "filter-list"}]]]
-        [:li {:class "dropdown"}
-         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-          "Row Label Fields"
-          [:b {:class "caret"}]]
-         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-          [:div {:id "row-label-fields"}]]]
-        [:li {:class "dropdown"}
-         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-          "Column Label Fields"
-          [:b {:class "caret"}]]
-         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-          [:div {:id "column-label-fields"}]]]
-        [:li {:class "dropdown"}
-         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-          "Summary Fields"
-          [:b {:class "caret"}]]
-         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-          [:div {:id "summary-fields"}]]]
-        [:li {:class "dropdown pull-right"}
-         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-          "Canned Reports"
-          [:b {:class "caret"}]]
-         [:ul {:class "dropdown-menu"}
-          [:li {} [:a {:id "ar-aged-balance", :href "#"} "AR Aged Balance"]]
-          [:li {} [:a {:id "miami-invoice-detail", :href "#"} "Miami Invoice Detail"]]]]]]
-      [:hr {}]
-      [:h1 {} "Results"]
-      [:span {:id "pivot-detail"}]
-      [:hr {}]
-      [:div {:id "results"}]]
-     [:script {:type "text/javascript"}
-      (js-code mapa-str)]]])
+  (comment [:html {:xmlns "http://www.w3.org/1999/xhtml", :xml:lang "en", :lang "en-us"}
+            [:body {}]])
+   (html 
+    [:div {:class "container"}
+     [:div {:class "subnav"}
+      [:ul {:class "nav nav-pills"}
+       [:li {:class "dropdown"}
+        [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"} "Filter Fields" [:b {:class "caret"}]]
+        [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+         [:div {:id "filter-list"}]]]
+       [:li {:class "dropdown"}
+        [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+         "Row Label Fields"
+         [:b {:class "caret"}]]
+        [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+         [:div {:id "row-label-fields"}]]]
+       [:li {:class "dropdown"}
+        [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+         "Column Label Fields"
+         [:b {:class "caret"}]]
+        [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+         [:div {:id "column-label-fields"}]]]
+       [:li {:class "dropdown"}
+        [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+         "Summary Fields"
+         [:b {:class "caret"}]]
+        [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+         [:div {:id "summary-fields"}]]]
+       [:li {:class "dropdown pull-right"}
+        [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+         "Canned Reports"
+         [:b {:class "caret"}]]
+        [:ul {:class "dropdown-menu"}
+         [:li {} [:a {:id "ar-aged-balance", :href "#"} "AR Aged Balance"]]
+         [:li {} [:a {:id "miami-invoice-detail", :href "#"} "Miami Invoice Detail"]]]]]]
+     [:hr {}]
+     [:h1 {} "Results"]
+     [:span {:id "pivot-detail"}]
+     [:hr {}]
+     [:div {:id "results"}]]
+    [:script {:type "text/javascript"}
+     (js-code mapa-str)]))
 
 
 (defn pivot-generator [mapa-str] (html pivot-csslol pivot-js (html-hickoried mapa-str)))
