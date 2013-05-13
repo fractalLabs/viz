@@ -23,7 +23,7 @@
 (def bar (makechart {"chart" {"type" "bar"}}))
 
 ;iba a ser con merge recur pero tiene que ser otra fn aware de [] y {} anidados
-(defn pie [m] (chart (merge 
+(defn dpie [m] (chart (merge 
   {"plotOptions" {"pie" {"allowPointSelect" "true", 
 			"cursor" "pointer", 
 			"dataLabels" {"enabled" "true", 
@@ -31,30 +31,15 @@
   "series" {"type" "pie"}}
     m)))
 
+(defn pie [v] (chart (merge 
+  {"plotOptions" {"pie" {"allowPointSelect" "true", 
+			"cursor" "pointer", 
+			"dataLabels" {"enabled" "true", 
+				      "formatter" "function() { return '<b>' + this.point.name + '</b>: ' + Math.round(this.point.y);} "}}}
+  "series" {"type" "pie"}}
+    {"series" [{"type" "pie" "data" v}]})))
 
-; Maps con descripciones demo
-(def barras-demo {
-"chart" {"type" "bar"}
-"title" {"text" "OLA K ASE"}
-"xAxis" {"categories" ["Manzanas" "Platanos" "Naranjas"]}
-"yAxis" {"title" {"text" "Frutas"}}
-"series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
-
-(def bubbles-demo {
-                   "xAxis" {"title" {"text" "la equis"}}
-"chart" {"type" "bubble" "zoomType" "xy"}
-"series"[{"name" "cjto 1" "data" [[4 2 3] [4 5 6] [7 8 9]]} {"name" "cjto 2" "data" [[10 11 12] [13 14 15] [16 17 18]]}]})
-
-;en construccion
-(def pie-demo [["a" 12] ["b" 24] ["c" 8]])
-
-(defn dirty-pie [v] (pie {"series" [{"type" "pie" "data" v}]}))
-
-(defn keystr [k]
-  (let [kstr (str k)]
-    (if (= \: (first k))
-      (apply str (rest k))
-      k)))
+(defn dirty-pie [v] (dpie {"series" [{"type" "pie" "data" v}]}))
 
 (defn series
   "Genera el vector de vectores que el mapa series en la key data"
@@ -69,6 +54,7 @@
               "data" (vec (map (fn [elem]
                                  (vec (for [i categs] (elem i))))
                                (val i)))})))))
+
 (defn gen-chart
   "maps - coleccion de mapas que usará para la gráfica
    chart - bar/pie/bubble etc
@@ -78,8 +64,12 @@
    :ytitle - la leyenda del eje y
    :name - la key que tomará c/valor para mostrar de maps"
   [maps chart & {:keys [title xtitle xvals ytitle name]}]
-  {"chart" {"type" chart}
-   "title" {"text" (or title "")}
-   "xAxis" (merge (if xtitle {"title" {"text" xtitle}}) {"categories" (vec (map str xvals))})
-   "yAxis" {"title" {"text" (or ytitle "")}}
-   "series" (doall (series maps name xvals chart))})
+  (if (not= "pie" chart )
+    {"chart" {"type" chart}
+     "title" {"text" (or title "")}
+     "xAxis" (merge (if xtitle {"title" {"text" xtitle}}) {"categories" (vec (map str xvals))})
+     "yAxis" {"title" {"text" (or ytitle "")}}
+     "series" (doall (series maps name xvals chart))}
+    (dirty-pie
+     (vec
+      (map #(vec [(name (first %)) (second %)]) (map #(vec (first (select-keys % [name]))) maps))))))
