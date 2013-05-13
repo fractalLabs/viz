@@ -3,33 +3,33 @@
   (:use [hiccup core page element]))
 
 
-(def charts (include-js jquery "http://code.highcharts.com/highcharts.js" "http://code.highcharts.com/modules/exporting.js" "http://code.highcharts.com/highcharts-more.js"))
+(def charts (include-js jquery 
+			"http://code.highcharts.com/highcharts.js" 
+			"http://code.highcharts.com/modules/exporting.js" 
+			"http://code.highcharts.com/highcharts-more.js"))
 
 (defn js-boiler [id s]
   (str "$(function () {
 	  $('#container" id "').highcharts("
-	  (js-format s)
-	  ");});"
-	  ))
+	    (js-format s) ");});" ))
 
 (defn map-defaults [m] (merge {"credits" {"enabled" "false"}, "title" {"text" ""}} m))
 
 (defn chart [m] 
-  (let [id (rand-id)] (html (str "<div id=\"container" id "\" style=\"height: 300px; width: 450px; margin: 0 auto\"></div>") (javascript-tag (js-boiler id (map-defaults m))))))
+  (let [id (rand-id)] (html (str "<div id=\"container" id "\" style=\"height: 300px; width: 450px; margin: 0 auto\"></div>") 
+			    (javascript-tag (js-boiler id (map-defaults m))))))
 
-(defn bubble [m] (chart (merge {"chart" {"type" "bubble" "zoomType" "xy"}} m)))
-(defn bar [m] (chart (merge {"chart" {"type" "bar"}} m)))
-(defn makechart [m] (fn [mm] (chart (merge m mm))))
+;TODO: iba a ser con merge recur pero tiene que ser otra fn aware de [] y {} anidados
+(defn makechart "Genera una funcion para hacer charts, con un mapa de defaults"
+  [m] (fn [mm] (chart (merge m mm))))
+
 (def bar (makechart {"chart" {"type" "bar"}}))
-
-;iba a ser con merge recur pero tiene que ser otra fn aware de [] y {} anidados
-(defn pie [m] (chart (merge 
-  {"plotOptions" {"pie" {"allowPointSelect" "true", 
-			"cursor" "pointer", 
-			"dataLabels" {"enabled" "true", 
-				      "formatter" "function() { return '<b>' + this.point.name + '</b>: ' + Math.round(this.point.y);} "}}}
-  "series" {"type" "pie"}}
-    m)))
+(def bubble (makechart {"chart" {"type" "bubble" "zoomType" "xy"}}))
+(def pie (makechart {"plotOptions" {"pie" {"allowPointSelect" "true",
+                        		   "cursor" "pointer",
+                        		   "dataLabels" {"enabled" "true",
+                                      			 "formatter" "function() { return '<b>' + this.point.name + '</b>: ' + Math.round(this.point.y);} "}}}
+   		     "series" {"type" "pie"}}))
 
 (defn dirty-pie [v] (pie {"series" [{"type" "pie" "data" v}]}))
 
