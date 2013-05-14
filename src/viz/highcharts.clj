@@ -72,4 +72,4 @@
      "series" (doall (series maps name xvals chart))}
     (dirty-pie
      (vec
-      (map #(vec [(name (first %)) (second %)]) (map #(vec (first (select-keys % [name]))) maps))))))
+      (map #(vec [(str (first %)) (second %)]) (map #(vec (first (select-keys % [name]))) maps))))))
