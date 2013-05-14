@@ -10,6 +10,8 @@
 ;en highcharts esto se llama charts, hay que llegar a convension.
 (def pivot-js (include-js jquery "http://static.fractalmedia.mx/subnav.js" "http://rjackson.github.io/pivot.js/lib/javascripts/accounting.min.js" "http://static.fractalmedia.mx/jquery.dataTables.min.js" "http://static.fractalmedia.mx/dataTables.bootstrap.js" "http://static.fractalmedia.mx/pivot.js" "http://static.fractalmedia.mx/jquery_pivot.js"))
 
+(def pivots (html pivot-css pivot-js))
+
 ;{url:'http://rjackson.github.io/pivot.js/./lib/csv/demo.csv', fields: fields, filters: {employer: 'Acme Corp'}, rowLabels:[\"city\"], summaries:[\"billed_amount\", \"payment_amount\"]}
 ;$('#miami-invoice-detail').click(function(event){
 ;      $('#pivot-demo').pivot_display('reprocess_display', {\"filters\":{\"city\":\"Miami\"},\"rowLabels\":[\"last_name\",\"first_name\",\"employer\",\"invoice_date\"],\"summaries\":[\"payment_amount\"]})
@@ -76,7 +78,7 @@
   [:script {:type "text/javascript"}
    (js-code mapa-str)]]])
 
-(defn pivot-generator [mapa-str] (html pivot-css pivot-js (html-hickoried mapa-str)))
+(defn pivot-generator [mapa-str] (html (html-hickoried mapa-str)))
 
 ;fields es un vector de mapas con llaves "name" "type" "filtrable"
 ;data llega como un vector de vectores donde el primer vector son los
