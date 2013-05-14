@@ -35,7 +35,8 @@
     });"))
 
 (defn html-hickoried [mapa-str]
-  (comment  [:body {}])
+  [:html {:xmlns "http://www.w3.org/1999/xhtml", :xml:lang "en", :lang "en-us"}
+ [:body {}
   [:div {:class "container"}
    [:div {:class "subnav"}
     [:ul {:class "nav nav-pills"}
@@ -73,7 +74,7 @@
    [:hr {}]
    [:div {:id "results"}]]
   [:script {:type "text/javascript"}
-   (js-code mapa-str)])
+   (js-code mapa-str)]]])
 
 (defn pivot-generator [mapa-str] (html pivot-csslol pivot-js (html-hickoried mapa-str)))
 
