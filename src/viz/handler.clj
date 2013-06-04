@@ -9,12 +9,12 @@
 ;; Data de prueba para charts
 (def data-test [{:a 0 :b 3 :c 6 :d 7 :e 2} {:a 1 :b 2 :c 3 :d 4 :e 2} {:a 5 :b 6 :c 7 :d 8 :e 4} {:a 9 :b 10 :c 11 :d 12 :e 4}])
 
-(def barras-demo {
-"chart" {"type" "bar"}
-"title" {"text" "OLA K ASE"}
-"xAxis" {"categories" ["Manzanas" "Platanos" "Naranjas"]}
-"yAxis" {"title" {"text" "Frutas"}}
-"series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
+(def barras-demo
+  {"chart" {"type" "bar"}
+   "title" {"text" "OLA K ASE"}
+   "xAxis" {"categories" ["Manzanas" "Platanos" "Naranjas"]}
+   "yAxis" {"title" {"text" "Frutas"}}
+   "series" [{"name" "Sammy" "data" [1 5 3]} {"name" "Miguel Luis" "data" [10 6 1]}]})
 
 (def bubbles-demo {
                    "xAxis" {"title" {"text" "la equis"}}
