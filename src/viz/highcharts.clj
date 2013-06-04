@@ -67,7 +67,7 @@
   (if (not= "pie" chart )
     {"chart" {"type" chart}
      "title" {"text" (or title "")}
-     "xAxis" (merge (if xtitle {"title" {"text" xtitle}}) {"categories" (vec (map str xvals))})
+     "xAxis" (merge {"title" {"text" (if xtitle xtitle "")}} (if-not (= "bubble" chart) {"categories" (vec (map str xvals))}))
      "yAxis" {"title" {"text" (or ytitle "")}}
      "series" (doall (series maps name xvals chart))}
     (dirty-pie
