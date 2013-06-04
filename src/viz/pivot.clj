@@ -37,46 +37,46 @@
     });"))
 
 (defn html-hickoried [mapa-str]
-  [:html {:xmlns "http://www.w3.org/1999/xhtml", :xml:lang "en", :lang "en-us"}
- [:body {}
-  [:div {:class "container"}
-   [:div {:class "subnav"}
-    [:ul {:class "nav nav-pills"}
-     [:li {:class "dropdown"}
-      [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"} "Filtrar" [:b {:class "caret"}]]
-      [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-       [:div {:id "filter-list"}]]]
-     [:li {:class "dropdown"}
-      [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-       "Campos Seleccionados"
-       [:b {:class "caret"}]]
-      [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-       [:div {:id "row-label-fields"}]]]
-     [:li {:class "dropdown"}
-      [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-       "Columnas"
-       [:b {:class "caret"}]]
-      [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-       [:div {:id "column-label-fields"}]]]
-     [:li {:class "dropdown"}
-      [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-       "Sumarios"
-       [:b {:class "caret"}]]
-      [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
-       [:div {:id "summary-fields"}]]]
-     [:li {:class "dropdown pull-right"}
-      [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
-       "Reportes"
-       [:b {:class "caret"}]]
-      [:ul {:class "dropdown-menu"}
-       [:li {} [:a {:id "miami-invoice-detail", :href "#"} "En construccion"]]]]]]
-   [:hr {}]
-   [:h1 {} "Resultados"]
-   [:span {:id "pivot-detail"}]
-   [:hr {}]
-   [:div {:id "results"}]]
-  [:script {:type "text/javascript"}
-   (js-code mapa-str)]]])
+   [:html {:xmlns "http://www.w3.org/1999/xhtml", :xml:lang "en", :lang "en-us"}
+    [:body {}
+     [:div {:class "container"}
+      [:div {:class "subnav"}
+       [:ul {:class "nav nav-pills"}
+        [:li {:class "dropdown"}
+         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"} "Filtrar" [:b {:class "caret"}]]
+         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+          [:div {:id "filter-list"}]]]
+        [:li {:class "dropdown"}
+         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+          "Campos Seleccionados"
+          [:b {:class "caret"}]]
+         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+          [:div {:id "row-label-fields"}]]]
+        [:li {:class "dropdown"}
+         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+          "Columnas"
+          [:b {:class "caret"}]]
+         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+          [:div {:id "column-label-fields"}]]]
+        [:li {:class "dropdown"}
+         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+          "Sumarios"
+          [:b {:class "caret"}]]
+         [:ul {:class "dropdown-menu stop-propagation", :style "overflow:auto;max-height:450px;padding:10px;"}
+          [:div {:id "summary-fields"}]]]
+        [:li {:class "dropdown pull-right"}
+         [:a {:class "dropdown-toggle", :data-toggle "dropdown", :href "#"}
+          "Reportes"
+          [:b {:class "caret"}]]
+         [:ul {:class "dropdown-menu"}
+          [:li {} [:a {:id "miami-invoice-detail", :href "#"} "En construccion"]]]]]]
+      [:hr {}]
+      [:h1 {} "Resultados"]
+      [:span {:id "pivot-detail"}]
+      [:hr {}]
+      [:div {:id "results"}]]
+     [:script {:type "text/javascript"}
+      (js-code mapa-str)]]])
 
 (defn pivot-generator [mapa-str] (html (html-hickoried mapa-str)))
 
