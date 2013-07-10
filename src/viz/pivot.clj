@@ -4,18 +4,20 @@
   (:use [hiccup core page element]))
 
 
-;TODO: Agragar imagenes de las flechitas para el ordenamiento
-(def pivot-css (include-css "http://static.fractalmedia.mx/bootstrap.min.css" "http://static.fractalmedia.mx/subnav.css" "http://static.fractalmedia.mx/pivot.css"))
+(def pivot-css (include-css "http://static.fractalmedia.mx/bootstrap.min.css"
+                            "http://static.fractalmedia.mx/subnav.css"
+                            "http://static.fractalmedia.mx/pivot.css"))
 
-;en highcharts esto se llama charts, hay que llegar a convension.
-(def pivot-js (include-js jquery "http://static.fractalmedia.mx/subnav.js" "http://rjackson.github.io/pivot.js/lib/javascripts/accounting.min.js" "http://static.fractalmedia.mx/jquery.dataTables.min.js" "http://static.fractalmedia.mx/dataTables.bootstrap.js" "http://static.fractalmedia.mx/pivot.js" "http://static.fractalmedia.mx/jquery_pivot.js"))
+(def pivot-js (include-js jquery
+                          "http://static.fractalmedia.mx/subnav.js"
+                          "http://rjackson.github.io/pivot.js/lib/javascripts/accounting.min.js"
+                          "http://static.fractalmedia.mx/jquery.dataTables.min.js"
+                          "http://static.fractalmedia.mx/dataTables.bootstrap.js"
+                          "http://static.fractalmedia.mx/pivot.js"
+                          "http://static.fractalmedia.mx/jquery_pivot.js"))
 
 (def pivots (html pivot-css pivot-js))
 
-;{url:'http://rjackson.github.io/pivot.js/./lib/csv/demo.csv', fields: fields, filters: {employer: 'Acme Corp'}, rowLabels:[\"city\"], summaries:[\"billed_amount\", \"payment_amount\"]}
-;$('#miami-invoice-detail').click(function(event){
-;      $('#pivot-demo').pivot_display('reprocess_display', {\"filters\":{\"city\":\"Miami\"},\"rowLabels\":[\"last_name\",\"first_name\",\"employer\",\"invoice_date\"],\"summaries\":[\"payment_amount\"]})
-                                        ;    });
 (defn js-code [mapa-str] (str
  "function setupPivot(input){
     input.callbacks = {afterUpdateResults: function(){
@@ -32,12 +34,9 @@
     setupPivot(" mapa-str ")
     // prevent dropdown from closing after selection
     $('.stop-propagation').click(function(event){
-      event.stopPropagation();});
-    // **Sexy** In your console type pivot.config() to view your current internal structure (the full initialize object).  Pass it to setup and you have a canned report.
-    });"))
+      event.stopPropagation();});});"))
 
-(defn html-hickoried [mapa-str]
-  [:div {:class "container"}
+(def subnav
    [:div {:class "subnav"}
     [:ul {:class "nav nav-pills"}
      [:li {:class "dropdown"}
@@ -67,7 +66,11 @@
        "Reportes"
        [:b {:class "caret"}]]
       [:ul {:class "dropdown-menu"}
-       [:li {} [:a {:id "miami-invoice-detail", :href "#"} "En construccion"]]]]]]
+       [:li {} [:a {:id "miami-invoice-detail", :href "#"} "En construccion"]]]]]])
+
+(defn html-hickoried [mapa-str]
+  [:div {:class "container"}
+   subnav
    [:hr {}]
    [:h1 {} "Resultados"]
    [:span {:id "pivot-detail"}]
@@ -81,7 +84,10 @@
 ;fields es un vector de mapas con llaves "name" "type" "filtrable"
 ;data llega como un vector de vectores donde el primer vector son los
 ;nombres de las columnas.
-(defn crea-mapa-str [fields data] (str "{json: " (generate-string data) ", fields:" (js-format fields) ", rowLabels: " (js-format fields) "}"))
+(defn crea-mapa-str [fields data]
+  (str "{json: " (generate-string data)
+       ", fields:" (js-format fields)
+       ", rowLabels: " (js-format fields)"}"))
 
 (defn pivot-with-definitions [fields data] (pivot-generator (crea-mapa-str fields data)))
 
@@ -91,7 +97,10 @@
           "string")))
 
 (defn fn-definitions-from-data [n v]
-  (hash-map "name" n "type" (data-type v) "filterable" true "summarizable" "count"))
+  (hash-map "name" n
+            "type" (data-type v)
+            "filterable" true
+            "summarizable" "count"))
 
 (defn definitions-from-data [colls]
   (let [names (first colls)
@@ -102,4 +111,5 @@
   (vec (map (fn [v] (vec (map #(if (nil? %) "" %) v))) vecs)))
 
 (defn pivot "Genera el hiccup de una pivot table, recibe como argumento un vector de vectores, donde el primero contiene los nombres de las columnas y el resto la data"
-  [colls] (pivot-with-definitions (definitions-from-data colls) (stringize-nils colls)))
+  [colls] (pivot-with-definitions (definitions-from-data colls)
+                                  (stringize-nils colls)))
