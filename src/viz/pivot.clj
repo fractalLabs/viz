@@ -72,7 +72,6 @@
   [:div {:class "container"}
    subnav
    [:hr {}]
-   [:h1 {} "Resultados"]
    [:span {:id "pivot-detail"}]
    [:hr {}]
    [:div {:id "results"}]
