@@ -47,7 +47,7 @@
                                                     "bubble" :title "a"
                                                     :xtitle "a b c" :xvals [:a :b :d] 
                                                     :name  :e))
-                         (gen-chart data-test "pie" :title "p" :name :e)))
+                         (gen-chart data-test "pie" :title "p" :xvals :e :name :a)))
   (GET "/pivot" [] (html pivot-css pivot-js [:body {} (pivot demo-data)]))
   (GET "/bubble" [] (html charts (chart (rand-id) bubbles-demo)))
   (route/resources "/")
