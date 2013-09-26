@@ -15,7 +15,7 @@
 (defn map-defaults [m] (merge {"credits" {"enabled" "false"}, "title" {"text" ""}} m))
 
 (defn chart [m] 
-  (let [id (rand-id)] (html (str "<div id=\"container" id "\" style=\"height: 480px; width: 640px; margin: 0 auto\"></div>") (javascript-tag (js-boiler id (map-defaults m))))))
+  (let [id (rand-id)] (html (str "<div id=\"container" id "\" style=\"height: 240px; width: 320px; margin: 0 auto\"></div>") (javascript-tag (js-boiler id (map-defaults m))))))
 
 (defn bubble [m] (chart (merge {"chart" {"type" "bubble" "zoomType" "xy"}} m)))
 (defn bar [m] (chart (merge {"chart" {"type" "bar"}} m)))
